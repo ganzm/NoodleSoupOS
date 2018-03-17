@@ -1,3 +1,6 @@
+#include "inttypes.h"
+
+
 #define SERIAL_COM1_BASE                0x3F8      /* COM1 base port */
 
 

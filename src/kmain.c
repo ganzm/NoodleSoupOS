@@ -3,8 +3,16 @@
 #include "serial.h"
 #include "io.h"
 
+#include "debug.h"
+
 
 void os_main() {
+
+	
+	// Setup COM1
+	serial_configure_baud_rate(SERIAL_COM1_BASE, 1);
+	serial_configure_line(SERIAL_COM1_BASE);
+
 	
 	fb_write_cell(0, 'A', FG_WHITE, BG_BLACK);
 	fb_write_cell(1, 'X', FG_BROWN, BG_GREEN_BLINK);
@@ -16,11 +24,9 @@ void os_main() {
 		fb_write("0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789\r\ntest", 137);
 	}
 	
+	LOG_DEBUG("hello log\n");
 	
 	
-	// Setup COM1
-	serial_configure_baud_rate(SERIAL_COM1_BASE, 2);
-	serial_configure_line(SERIAL_COM1_BASE);
 	
 	
 	serial_send(SERIAL_COM1_BASE, 0x41);
