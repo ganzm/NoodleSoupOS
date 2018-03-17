@@ -1,11 +1,11 @@
-OBJECTS = src/loader.o src/kmain.o src/fb.o src/io.o src/serial.o
+OBJECTS = src/loader.o src/kmain.o src/fb.o src/io.o src/serial.o src/debug.o src/string.o
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
 LDFLAGS = -T src/link.ld -melf_i386
 AS = nasm
 ASFLAGS = -f elf -g
 
-all: os.iso
+all: NoodleSoupOS.iso
 
 kernel.elf: $(OBJECTS)
 	ld $(LDFLAGS) $(OBJECTS) -o kernel.elf
