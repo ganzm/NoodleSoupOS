@@ -1,5 +1,6 @@
 *.o
-kernel.iso
-
 kernel.sym
 kernel.elf
+
+NoodleSoupOS.iso
+
