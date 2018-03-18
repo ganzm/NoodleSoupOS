@@ -40,12 +40,15 @@
 #define BG_BROWN_BLINK 0xe
 #define BG_LIGHGRAY_BLINK 0xf
 
+
+void fb_set_color(unsigned char fg, unsigned char bg);
+
 void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg);
 
 void fb_move_cursor(uint16_t pos);
 
+int fb_write(const char *buf);
 
-
-int fb_write(char *buf, uint len);
+void fb_clear();
 
 #endif  /* FB_H */

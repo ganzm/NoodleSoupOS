@@ -13,3 +13,7 @@ void outb(uint16_t io_port, uint8_t value);
  *  @return      The read byte
  */
 uint8_t inb(uint16_t io_port);
+
+
+
+void init_gdt_asm(void *descriptor);

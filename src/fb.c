@@ -12,6 +12,11 @@ static uint16_t cursor_pos = 0;
 static uint16_t color = ((BG_BLACK & 0xf) << 4) | (FG_GREEN & 0xf);
 
 
+void fb_set_color(unsigned char fg, unsigned char bg) {
+	color = ((bg & 0xf) << 4) | (fg & 0xf);
+}
+	
+
 /** fb_write_cell:
  *  Writes a character with the given foreground and background to position i
  *  in the framebuffer.
@@ -46,12 +51,14 @@ void fb_move_cursor(uint16_t pos) {
 }
 
 
+int fb_write(const char *buf) {
 
-
-int fb_write(char *buf, uint len) {
-
-	for(uint i = 0; i < len; i++){
+	for(uint i = 0; 1; i++){
 		char c = buf[i];
+		if(c == '\0') {
+			// end of string
+			break;
+		}
 
 		if(0x20 <= c && c <= 0x7e) {
 			// write single VISIBLE char to current cursor position
@@ -95,11 +102,18 @@ int fb_write(char *buf, uint len) {
 			cursor_pos -= SCREEN_LENGTH;
 			fb_move_cursor(cursor_pos);
 		}
-		
-		
-		
 	}
 	
 	return 0;
 }
 
+
+void fb_clear() {
+	uint16_t *fb= (uint16_t *)0x000B8000;	
+	
+	for(uint i = 0 ; i < (SCREEN_LENGTH * SCREEN_HEIGTH) ; i++) {
+		fb[i] = 0;
+	}
+	
+	fb_move_cursor(0);
+}

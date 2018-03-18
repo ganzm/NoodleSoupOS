@@ -23,3 +23,23 @@
         mov dx, [esp + 4]       ; move the address of the I/O port to the dx register
         in  al, dx              ; read a byte from the I/O port and store it in the al register
         ret                     ; return the read byte
+
+
+
+	; Load Global Descriptor table
+	global init_gdt_asm
+	
+	init_gdt_asm:
+		mov eax, [esp + 4]
+		lgdt [eax]				; load global descriptor table
+		
+		
+		; offset(index bit 15:3), ti (0=GDT, 1=LDT), rpl=(requested priviledge level)
+		mov eax, 0x20
+		mov ds, eax				; reference 4th segement index
+		mov ss, eax				; reference 4th segement index
+		mov es, eax				; reference 4th segement index
+		
+		jmp 0x08:switch_cs
+	switch_cs:
+		ret

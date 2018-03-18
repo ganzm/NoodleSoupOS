@@ -2,36 +2,42 @@
 #include "fb.h"
 #include "serial.h"
 #include "io.h"
-
+#include "descriptor_table.h"
 #include "debug.h"
 
 
 void os_main() {
 
 	
-	// Setup COM1
-	serial_configure_baud_rate(SERIAL_COM1_BASE, 1);
-	serial_configure_line(SERIAL_COM1_BASE);
+
+	LOG_INIT();
+
+	fb_clear();
+	
+	fb_set_color(FG_CYAN, BG_BLACK_BLINK);
+	fb_write("----------\n");
+	fb_set_color(FG_GREEN, BG_BLACK);
+	fb_write("NoodSoupOS\n");
+	fb_set_color(FG_CYAN, BG_BLACK_BLINK);
+	fb_write("----------\n");
+	fb_set_color(FG_GREEN, BG_BLACK);
+	
+	
+	
+	init_gdt();
+	fb_write("GDT initialized\n");
+	
+	LOG_DEBUG("hello log\n");
 
 	
-	fb_write_cell(0, 'A', FG_WHITE, BG_BLACK);
-	fb_write_cell(1, 'X', FG_BROWN, BG_GREEN_BLINK);
-	
-	
+
+
+	fb_write("Now Ready!\n");
+	/*
 	fb_move_cursor(0x0051);
-	
 	for(int i = 0 ; i < 100; i++) {
 		fb_write("0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789\r\ntest", 137);
 	}
+	*/	
 	
-	LOG_DEBUG("hello log\n");
-	
-	
-	
-	
-	serial_send(SERIAL_COM1_BASE, 0x41);
-	serial_send(SERIAL_COM1_BASE, 0x42);
-	serial_send(SERIAL_COM1_BASE, 0x43);
-	serial_send(SERIAL_COM1_BASE, 0x44);
-
 }
