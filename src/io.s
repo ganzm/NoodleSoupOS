@@ -1,4 +1,11 @@
 
+	global io_wait
+	
+	io_wait:
+		mov al, 0x80
+		out 0, al
+		ret
+
 
     global outb             ; make the label outb visible outside this file
 
@@ -42,4 +49,15 @@
 		
 		jmp 0x08:switch_cs
 	switch_cs:
+		ret
+
+	
+	global int_init_asm
+	
+	int_init_asm:
+		mov eax, [esp + 4]
+		lidt [eax]				; load global descriptor table
+		
+		sti
+		
 		ret

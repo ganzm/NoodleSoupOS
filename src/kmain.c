@@ -3,6 +3,7 @@
 #include "serial.h"
 #include "io.h"
 #include "descriptor_table.h"
+#include "interrupt.h"
 #include "debug.h"
 
 
@@ -17,15 +18,18 @@ void os_main() {
 	fb_set_color(FG_CYAN, BG_BLACK_BLINK);
 	fb_write("----------\n");
 	fb_set_color(FG_GREEN, BG_BLACK);
-	fb_write("NoodSoupOS\n");
+	fb_write("NoodleSoupOS\n");
 	fb_set_color(FG_CYAN, BG_BLACK_BLINK);
 	fb_write("----------\n");
 	fb_set_color(FG_GREEN, BG_BLACK);
 	
 	
-	
-	init_gdt();
+	gdt_init();
 	fb_write("GDT initialized\n");
+	
+	
+	
+	int_init();
 	
 	LOG_DEBUG("hello log\n");
 

@@ -10,6 +10,7 @@ typedef struct gdt_descriptor {
 } __attribute__ ((packed)) gdt_descriptor_t;
 
 
-void init_gdt();
+void gdt_init();
+
 #endif /* DESCRIPTOR_TABLE_H */
 

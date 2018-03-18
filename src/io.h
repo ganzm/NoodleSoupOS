@@ -1,5 +1,7 @@
 #include "inttypes.h"
 
+void io_wait();
+
 /**
  * outb - send a byte to an I/O port
  */
@@ -16,4 +18,6 @@ uint8_t inb(uint16_t io_port);
 
 
 
+// TODO should be moved
 void init_gdt_asm(void *descriptor);
+void int_init_asm(void *descriptor);

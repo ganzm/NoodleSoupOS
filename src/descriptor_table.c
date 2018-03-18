@@ -38,7 +38,7 @@ create_descriptor(uint32_t base, uint32_t limit, uint16_t flag)
 	return descriptor;
 }
 
-void init_gdt(){
+void gdt_init(){
 	
 	// needs to be 0
 	gdt_table[0] = create_descriptor(0, 0, 0);
